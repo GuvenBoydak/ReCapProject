@@ -1,5 +1,6 @@
 ﻿using Business.Concrete;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using System;
 
@@ -11,7 +12,7 @@ namespace ConsoleUI
         {
             ICarDal InMemoryCarDal = new InMemoryCarDal();
 
-            CarManager carManager = new CarManager(InMemoryCarDal);
+            CarManager carManager = new CarManager(new EfCarDal());
 
             foreach (var car in carManager.GetAll())
             {
