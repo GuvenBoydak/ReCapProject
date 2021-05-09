@@ -10,7 +10,8 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            //CarGetAllTest();
+            CarGetAllTest();
+
             //CarGetByBrandIdTest();
             //CarGetByColorIdTest();
 
@@ -21,8 +22,8 @@ namespace ConsoleUI
             //BrandGetAllTest();
             //BrandGetByIdTest();
 
-            CarDetailDtoGetCarDetail();
- 
+            //CarDetailDtoGetCarDetail();
+
 
         }
 
@@ -30,7 +31,7 @@ namespace ConsoleUI
         {
             CarManager carManager = new CarManager(new EfCarDal());
 
-            foreach (var car in carManager.GetAllCarDetail())
+            foreach (var car in carManager.GetAllCarDetail().Data)
             {
                 Console.WriteLine(car.CarId + " * " + car.BrandName + " * " + car.ColorName + " * " + car.DailyPrice);
             }
@@ -40,7 +41,7 @@ namespace ConsoleUI
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
 
-            foreach (var brand in brandManager.GetById(1))
+            foreach (var brand in brandManager.GetById(1).Data)
             {
                 Console.WriteLine(brand.BrandId + " " + brand.BrandName);
             }
@@ -50,7 +51,7 @@ namespace ConsoleUI
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
 
-            foreach (var brand in brandManager.GetAll())
+            foreach (var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine(brand.BrandId + " " + brand.BrandName);
             }
@@ -60,7 +61,7 @@ namespace ConsoleUI
         {
             ColorManager colorManager = new ColorManager(new EfColorDal());
 
-            foreach (var color in colorManager.GetById(1))
+            foreach (var color in colorManager.GetById(1).Data)
             {
                 Console.WriteLine(color.ColorId + " " + color.ColorName);
             }
@@ -71,7 +72,7 @@ namespace ConsoleUI
         {
             ColorManager colorManager = new ColorManager(new EfColorDal());
 
-            foreach (var color in colorManager.GetAll())
+            foreach (var color in colorManager.GetAll().Data)
             {
                 Console.WriteLine(color.ColorId + " " + color.ColorName);
             }
@@ -82,7 +83,7 @@ namespace ConsoleUI
         {
             CarManager carManager = new CarManager(new EfCarDal());
 
-            foreach (var car in carManager.GetCarsByColorId(1))
+            foreach (var car in carManager.GetCarsByColorId(1).Data)
             {
                 Console.WriteLine(car.Id + " " + car.BrandId + " " +
                     car.ColorId + " " + car.ModelYear + " " + car.DailyPrice + " " + car.Description);
@@ -94,7 +95,7 @@ namespace ConsoleUI
         {
             CarManager carManager = new CarManager(new EfCarDal());
 
-            foreach (var car in carManager.GetCarsByBrandId(1))
+            foreach (var car in carManager.GetCarsByBrandId(1).Data)
             {
                 Console.WriteLine(car.Id + " " + car.BrandId + " " +
                     car.ColorId + " " + car.ModelYear + " " + car.DailyPrice + " " + car.Description);
@@ -106,12 +107,23 @@ namespace ConsoleUI
         {
             CarManager carManager = new CarManager(new EfCarDal());
 
-            foreach (var car in carManager.GetAll())
+            var result = carManager.GetAll();
+
+            if (result.Success == true)
             {
-                Console.WriteLine(car.Id + " " + car.BrandId + " " +
-                    car.ColorId + " " + car.ModelYear + " " + car.DailyPrice + " " + car.Description);
-                Console.WriteLine("-------------------------");
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine(car.Id + " " + car.BrandId + " " +
+                        car.ColorId + " " + car.ModelYear + " " + car.DailyPrice + " " + car.Description);
+                    Console.WriteLine("-------------------------");
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
+
         }
     }
 }

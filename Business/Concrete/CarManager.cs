@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -17,39 +19,58 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        public void Delete(Car car)
+        public IResult Delete(Car car)
         {
             _carDal.Delete(car);
+
+            return new SuccessResult(Messages.ProductDeleted);
         }
 
-        public List<Car> GetAll()
+        public IDataResult<List<Car>> GetAll()
         {
-            return _carDal.GetAll();
+            if (DateTime.Now.Hour==12)
+            {
+                return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
+            }
+
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.ProductListed);
         }
 
-        public List<CarDetailDto> GetAllCarDetail()
+        public IDataResult<List<CarDetailDto>> GetAllCarDetail()
         {
-            return _carDal.GetCarDetails();
+            return  new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
 
-        public List<Car> GetCarsByBrandId(int id)
+        public IDataResult<Car> GetById(int CarId)
         {
-            return _carDal.GetAll(p => p.BrandId == id);
+            return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == CarId));
         }
 
-        public List<Car> GetCarsByColorId(int id)
+        public IDataResult<List<Car>> GetCarsByBrandId(int id)
         {
-            return _carDal.GetAll(p => p.ColorId == id);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.BrandId == id));
         }
 
-        public void Inserd(Car car)
+        public IDataResult<List<Car>> GetCarsByColorId(int id)
         {
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.ColorId == id));
+        }
+
+        public IResult Inserd(Car car)
+        {
+            if (car.Description.Length<2)
+            {
+                return new ErrorResult(Messages.ProductDescriptionInvalid);
+            }
             _carDal.Add(car);
+
+            return new SuccessResult(Messages.ProductAdded);
         }
 
-        public void Update(Car car)
+        public IResult Update(Car car)
         {
             _carDal.Update(car);
+            return new SuccessResult(Messages.ProductUpdated);
         }
     }
 }
