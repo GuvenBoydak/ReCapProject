@@ -22,12 +22,12 @@ namespace Business.Concrete
         {
             _colorDal.Delete(color);
 
-            return new SuccessResult(Messages.ProductDeleted);
+            return new SuccessResult(Messages.ColorDeleted);
         }
 
         public IDataResult<List<Color>> GetAll()
         {
-            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(),Messages.ProductListed);
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(),Messages.ColorsListed);
         }
 
         public IDataResult<List<Color>> GetById(int id)
@@ -35,18 +35,18 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Color>>(_colorDal.GetAll(c => c.ColorId == id));
         }
 
-        public IResult Inserd(Color color)
+        public IResult Add(Color color)
         {
             _colorDal.Add(color);
 
-            return new SuccessResult(Messages.ProductAdded);
+            return new SuccessResult(Messages.ColorAdded);
         }
 
         public IResult Update(Color color)
         {
             _colorDal.Update(color);
 
-            return new SuccessResult(Messages.ProductUpdated);
+            return new SuccessResult(Messages.ColorUpdated);
         }
     }
 }

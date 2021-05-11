@@ -19,7 +19,7 @@ namespace Business.Abstract
 
         IDataResult<Car> GetById(int CarId);
 
-        IResult Inserd(Car car);
+        IResult Add(Car car);
 
         IResult Delete(Car car);
 

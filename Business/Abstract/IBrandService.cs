@@ -12,7 +12,7 @@ namespace Business.Abstract
 
         IDataResult<List<Brand>> GetById(int id);
 
-        IResult Inserd(Brand brand);
+        IResult Add(Brand brand);
 
         IResult Delete(Brand brand);
 
