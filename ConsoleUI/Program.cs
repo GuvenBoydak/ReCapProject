@@ -37,7 +37,7 @@ namespace ConsoleUI
 
             Rental rental1 = new Rental
             {
-                Id = 5,
+                RentalId = 5,
                 CarId = 5,
                 CustomerId = 5,
                 RentDate = new DateTime(2021, 05, 10),
@@ -76,7 +76,7 @@ namespace ConsoleUI
         {
             Customer customer1 = new Customer
             {
-                Id = 7,
+                CustomerId = 7,
                 UserId = 7,
                 CompanyName = "ByCarRent"
 
@@ -158,7 +158,7 @@ namespace ConsoleUI
 
             foreach (var car in carManager.GetCarsByColorId(1).Data)
             {
-                Console.WriteLine(car.Id + " " + car.BrandId + " " +
+                Console.WriteLine(car.CarId + " " + car.BrandId + " " +
                     car.ColorId + " " + car.ModelYear + " " + car.DailyPrice + " " + car.Description);
                 Console.WriteLine("-------------------------");
             }
@@ -170,7 +170,7 @@ namespace ConsoleUI
 
             foreach (var car in carManager.GetCarsByBrandId(1).Data)
             {
-                Console.WriteLine(car.Id + " " + car.BrandId + " " +
+                Console.WriteLine(car.CarId + " " + car.BrandId + " " +
                     car.ColorId + " " + car.ModelYear + " " + car.DailyPrice + " " + car.Description);
                 Console.WriteLine("-------------------------");
             }
@@ -186,7 +186,7 @@ namespace ConsoleUI
             {
                 foreach (var car in result.Data)
                 {
-                    Console.WriteLine(car.Id + " " + car.BrandId + " " +
+                    Console.WriteLine(car.CarId + " " + car.BrandId + " " +
                         car.ColorId + " " + car.ModelYear + " " + car.DailyPrice + " " + car.Description);
                     Console.WriteLine("-------------------------");
                 }

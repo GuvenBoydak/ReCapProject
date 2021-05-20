@@ -24,7 +24,7 @@ namespace Business.Concrete
         {
             ValidationTool.Validate(new RentalValidator(), rental);
 
-            var result = _rentalDal.Get(r => r.Id == rental.Id && r.ReturnDate == null);
+            var result = _rentalDal.Get(r => r.RentalId == rental.RentalId && r.ReturnDate == null);
 
             if (result !=null)
             {
@@ -51,7 +51,7 @@ namespace Business.Concrete
 
         public IDataResult<Rental> GetById(int id)
         {
-            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id == id));
+            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.RentalId == id));
         }
 
         public IResult Update(Rental rental)

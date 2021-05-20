@@ -17,11 +17,11 @@ namespace DataAccess.Concrete.InMemory
         {
             _cars = new List<Car>
             {
-                new Car { Id=1, BrandId=1, ColorId=1, ModelYear=2010, DailyPrice=400, Description="320"},
-                new Car { Id=2, BrandId=2, ColorId=2, ModelYear=2015, DailyPrice=350, Description="A3"},
-                new Car { Id=3, BrandId=3, ColorId=3, ModelYear=2018, DailyPrice=250, Description="Leon"},
-                new Car { Id=4, BrandId=3, ColorId=2, ModelYear=2019, DailyPrice=550, Description="Caravella"},
-                new Car { Id=5, BrandId=4, ColorId=4, ModelYear=2020, DailyPrice=200, Description="Clio"},
+                new Car { CarId=1, BrandId=1, ColorId=1, ModelYear=2010, DailyPrice=400, Description="320"},
+                new Car { CarId=2, BrandId=2, ColorId=2, ModelYear=2015, DailyPrice=350, Description="A3"},
+                new Car { CarId=3, BrandId=3, ColorId=3, ModelYear=2018, DailyPrice=250, Description="Leon"},
+                new Car { CarId=4, BrandId=3, ColorId=2, ModelYear=2019, DailyPrice=550, Description="Caravella"},
+                new Car { CarId=5, BrandId=4, ColorId=4, ModelYear=2020, DailyPrice=200, Description="Clio"},
             };
         }
 
@@ -32,7 +32,7 @@ namespace DataAccess.Concrete.InMemory
 
         public void Delete(Car car)
         {
-            var CarDelete = _cars.SingleOrDefault(p => p.Id == car.Id);
+            var CarDelete = _cars.SingleOrDefault(p => p.CarId == car.CarId);
             _cars.Remove(CarDelete);
         }
 
@@ -63,7 +63,7 @@ namespace DataAccess.Concrete.InMemory
 
         public void Update(Car car)
         {
-            var CarUpdate = _cars.SingleOrDefault(p => p.Id == car.Id);
+            var CarUpdate = _cars.SingleOrDefault(p => p.CarId == car.CarId);
 
             CarUpdate.BrandId = car.BrandId;
             CarUpdate.ColorId = car.ColorId;

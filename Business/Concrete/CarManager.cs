@@ -32,7 +32,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetAll()
         {
-            if (DateTime.Now.Hour==12)
+            if (DateTime.Now.Hour==0)
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
@@ -47,7 +47,7 @@ namespace Business.Concrete
 
         public IDataResult<Car> GetById(int CarId)
         {
-            return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == CarId));
+            return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == CarId));
         }
 
         public IDataResult<List<Car>> GetCarsByBrandId(int id)
