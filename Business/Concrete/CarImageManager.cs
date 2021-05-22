@@ -17,12 +17,11 @@ namespace Business.Concrete
     {
 
         ICarImageDal _carImageDal;
-        FileHelper _fileHelper;
 
-        public CarImageManager(ICarImageDal carImageDal, FileHelper fileHelper)
+        public CarImageManager(ICarImageDal carImageDal)
         {
             _carImageDal = carImageDal;
-            _fileHelper = fileHelper;
+
         }
 
 

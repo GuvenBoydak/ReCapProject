@@ -26,9 +26,9 @@ namespace WepAPI.Controllers
             var result = _colorService.GetAll();
             if (result.Success)
             {
-                return Ok();
+                return Ok(result);
             }
-            return BadRequest();
+            return BadRequest(result);
         }
 
         [HttpGet("getbyid")]
@@ -37,9 +37,9 @@ namespace WepAPI.Controllers
             var result = _colorService.GetById(id);
             if (result.Success)
             {
-                return Ok();
+                return Ok(result);
             }
-            return BadRequest();
+            return BadRequest(result);
         }
 
         [HttpPost("add")]

@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Core.DataAccess.EntityFramework
 {
@@ -14,11 +13,11 @@ namespace Core.DataAccess.EntityFramework
     {
         public void Add(TEntity entity)
         {
-            using (TContext carContext = new TContext())
+            using (TContext ctx = new TContext())
             {
-                var addedEntity = carContext.Entry(entity);
+                var addedEntity = ctx.Entry(entity);
                 addedEntity.State = EntityState.Added;
-                carContext.SaveChanges();
+                ctx.SaveChanges();
             }
         }
 
