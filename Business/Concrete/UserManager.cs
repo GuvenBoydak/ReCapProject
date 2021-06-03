@@ -2,6 +2,7 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.CrossCuttingConcerns.Validation;
+using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -22,35 +23,21 @@ namespace Business.Concrete
 
         public IResult Add(User user)
         {
-            ValidationTool.Validate(new UserValidator(), user);
-
             _userDal.Add(user);
-
             return new SuccessResult(Messages.UserAdded);
         }
 
-        public IResult Delete(User user)
+        public IDataResult<User> GetByMail(string email)
         {
-            _userDal.Delete(user);
-
-            return new SuccessResult(Messages.UserDeleted);
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
         }
 
-        public IDataResult<List<User>> GetAll()
-        {
-            return new SuccessDataResult<List<User>>(_userDal.GetAll(),Messages.UsersListed);
-        }
 
-        public IDataResult<User>GetById(int id)
-        {
-            return new SuccessDataResult<User>(_userDal.Get(u => u.Id == id));
-        }
 
-        public IResult Update(User user)
+        public IDataResult<List<OperationClaim>> GetClaims(User user)
         {
-            _userDal.Update(user);
+            return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
 
-            return new SuccessResult(Messages.UserUpdated);
         }
     }
 }
