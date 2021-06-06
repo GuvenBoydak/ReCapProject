@@ -13,21 +13,21 @@ namespace ConsoleUI
         {
             CarGetAllTest();
 
-            //CarGetByBrandIdTest();
-            //CarGetByColorIdTest();
+            CarGetByBrandIdTest();
+            CarGetByColorIdTest();
 
             ColorGetAllTest();
-            //ColorGetByIdTest();
+            ColorGetByIdTest();
 
 
             BrandGetAllTest();
-            //BrandGetByIdTest();
+            BrandGetByIdTest();
 
-            //CarDetailDtoGetCarDetail();
+            CarDetailDtoGetCarDetail();
 
-            //CustomerAddTest();
+            CustomerAddTest();
 
-            //RentalAddTest();
+            RentalAddTest();
 
         }
 
@@ -38,7 +38,6 @@ namespace ConsoleUI
             Rental rental1 = new Rental
             {
                 RentalId = 5,
-                CarId = 5,
                 CustomerId = 5,
                 RentDate = new DateTime(2021, 05, 10),
                 ReturnDate = new DateTime(2021, 05, 15),
@@ -46,7 +45,7 @@ namespace ConsoleUI
 
             var result1 = rentalManager.Add(rental1);
 
-            if (result1.Success==true)
+            if (result1.Success == true)
             {
                 Console.WriteLine(result1.Message);
             }
